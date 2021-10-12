@@ -18,6 +18,10 @@ Type:
 wget https://raw.githubusercontent.com/syproduction/ipodrpi/main/osmc.sh
 ./osmc.sh
 ```
+If any problems with Permission denied or command not found, do:
+```
+sudo chmod +x ./osmc.sh
+```
 Ssh on computer (Mac) may refuse to connect if you were previously connecting to this RPi, then:
 ```
 rm ~/.ssh/known_hosts
