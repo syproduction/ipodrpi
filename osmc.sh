@@ -70,6 +70,7 @@ echo -e "\e[1;36m NOW INSTALLING click.c \e[0m"
 cd ~
 git clone https://github.com/WiringPi/WiringPi
 cd ~/WiringPi/
+./build
 
 cd ~/ipodrpi
 gcc -Wall -pthread -o click click.c -lpigpio -lrt -lwiringPi
