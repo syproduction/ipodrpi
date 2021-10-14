@@ -46,6 +46,7 @@ sudo sed -i -e '$ i\fbcp&' /etc/rc.local
 
 echo -e "\e[1;36m NOW INSTALL pikeyd \e[0m"  
 cd ~
+sudo cp ~/ipodrpi/etc/pikeyd.conf /etc/pikeyd.conf
 git clone git://github.com/mmoller2k/pikeyd
 make -C pikeyd
 sudo cp pikeyd/pikeyd /usr/local/bin/
