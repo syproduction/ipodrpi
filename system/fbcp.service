@@ -1,0 +1,9 @@
+[Unit]
+Description=----- FBCP DISPLAY -----
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/local/bin/fbcp
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=----- PIKEYD -----
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/local/bin/pikeyd -d
+
+[Install]
+WantedBy=multi-user.target

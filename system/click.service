@@ -1,0 +1,11 @@
+[Unit]
+Description=----- CLICKWHEEL -----
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=on-failure
+ExecStart=/usr/local/bin/click
+
+[Install]
+WantedBy=multi-user.target
