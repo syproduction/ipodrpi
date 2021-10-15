@@ -51,7 +51,6 @@ git clone git://github.com/mmoller2k/pikeyd
 make -C pikeyd
 sudo cp pikeyd/pikeyd /usr/local/bin/
 sudo sed -i -e '$ i\/usr/local/bin/pikeyd -d' /etc/rc.local
-
 echo -e "\e[1;36m pikeyd INSTALLED AS DAEMON (/etc/rc.local METHOD) \e[0m"  
 
 
@@ -72,13 +71,29 @@ cd ~
 git clone https://github.com/WiringPi/WiringPi
 cd ~/WiringPi/
 ./build
-
 cd ~/ipodrpi
 gcc -Wall -pthread -o click click.c -lpigpio -lrt -lwiringPi
 sudo chmod +x click
 sudo cp ~/ipodrpi/click /usr/local/bin/click
 sudo sed -i -e '$ i\click&' /etc/rc.local
 
-echo -e "\e[1;36m DONE. PLEASE REBOOT NOW \e[0m"  
+read -r -p "CLEANUP ? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+        echo -e "\e[1;36m CLEANUP WILL BE IMPLEMENTED LATER  \e[0m"
+else
+    echo Skipping..
+        exit 0
+fi
 
+echo -e "\e[1;36m DONE. PLEASE REBOOT NOW \e[0m"
 
+read -r -p "REBOOT ? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+        echo -e "\e[1;36m OK, REBOOTING  \e[0m"
+        sudo reboot now
+else
+    echo Skipping..
+        exit 0
+fi

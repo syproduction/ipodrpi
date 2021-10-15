@@ -31,12 +31,17 @@
 #define BUTTON_STATE_INDEX 1
 #define WHEEL_POSITION_INDEX 2
 
-#define KEY_LEFT 	30      // 0	30
-#define KEY_RIGHT       31	//1	31
-#define KEY_UP          27	//16 	27
-#define KEY_DOWN        22	//6	22
-#define KEY_ENTER       23	//13	23
- 
+#define KEY_LEFT         30
+#define KEY_RIGHT       31
+#define KEY_UP          27
+#define KEY_DOWN        22
+#define KEY_ENTER       23
+#define SCROLL_DN       26
+#define SCROLL_UP       28
+
+
+
+
 // used to store the current packet
 uint32_t bits = 0;
 // used to store the previous full packet
@@ -47,14 +52,15 @@ uint8_t recording = 0;
 // indicates whether the data pin is high or low
 uint8_t dataBit = 1;
 uint8_t lastPosition = 255;
+uint8_t prevWheelPosition = 0;
 int hapticWaveId = -1;
 
 char buttons[] = { 
-    CENTER_BUTTON_BIT, 
-    LEFT_BUTTON_BIT, 
-    RIGHT_BUTTON_BIT, 
-    UP_BUTTON_BIT, 
-    DOWN_BUTTON_BIT, 
+    CENTER_BUTTON_BIT,
+    LEFT_BUTTON_BIT,
+    RIGHT_BUTTON_BIT,
+    UP_BUTTON_BIT,
+    DOWN_BUTTON_BIT,
     WHEEL_TOUCH_BIT
 };
 
@@ -73,7 +79,7 @@ void printBinary(uint32_t value) {
             printf("1");
         else
             printf("0");
-
+        
         value >>= 1;
     }
     printf("\n");
@@ -92,41 +98,41 @@ void sendPacket() {
         if ((bits >> buttonIndex) & 1 && !((lastBits >> buttonIndex) & 1)) {
             buffer[BUTTON_INDEX] = buttonIndex;
             buffer[BUTTON_STATE_INDEX] = 1;
-           // printf("button pressed: %d\n", buttonIndex);
-		if (buttonIndex == 7)//enter
+            // printf("button pressed: %d\n", buttonIndex);
+            if (buttonIndex == 7)//enter
             {	digitalWrite(KEY_ENTER,LOW);
-		}
+            }
             if (buttonIndex==11) //up
             {
-		digitalWrite(KEY_UP,LOW);
+                digitalWrite(KEY_UP,LOW);
             }
             if (buttonIndex==10) //down
             {
-		digitalWrite(KEY_DOWN,LOW);
+                digitalWrite(KEY_DOWN,LOW);
             }
             if (buttonIndex==9) //left
             {
-		digitalWrite(KEY_LEFT,LOW);
-		//putchar(0x44);
+                digitalWrite(KEY_LEFT,LOW);
+                //putchar(0x44);
             }
             if (buttonIndex==8) //RIGHT
             {
-		digitalWrite(KEY_RIGHT,LOW);
-		//putchar(0x43);
-
-            }			 
-
-
-       } else if (!((bits >> buttonIndex) & 1) && (lastBits >> buttonIndex) & 1) {
+                digitalWrite(KEY_RIGHT,LOW);
+                //putchar(0x43);
+                
+            }
+            
+            
+        } else if (!((bits >> buttonIndex) & 1) && (lastBits >> buttonIndex) & 1) {
             buffer[BUTTON_INDEX] = buttonIndex;
             buffer[BUTTON_STATE_INDEX] = 0;
-           // printf("button released: %d\n", buttonIndex);
-	digitalWrite(KEY_ENTER,HIGH);
-	digitalWrite(KEY_UP,HIGH);
-	digitalWrite(KEY_DOWN,HIGH);
-	digitalWrite(KEY_LEFT,HIGH);
-	digitalWrite(KEY_RIGHT,HIGH);        
-}
+            // printf("button released: %d\n", buttonIndex);
+            digitalWrite(KEY_ENTER,HIGH);
+            digitalWrite(KEY_UP,HIGH);
+            digitalWrite(KEY_DOWN,HIGH);
+            digitalWrite(KEY_LEFT,HIGH);
+            digitalWrite(KEY_RIGHT,HIGH);
+        }
     }
     uint8_t wheelPosition = (bits >> 16) & 0xFF;
     // send haptics every other position. too sensitive otherwise
@@ -140,22 +146,49 @@ void sendPacket() {
     if (memcmp(prev_buffer, buffer, BUFFER_SIZE) == 0) {
         return;
     }
-    //printf("position %d\n", wheelPosition);
+    
+    if (wheelPosition==47&&prevWheelPosition==0)
+    {
+        digitalWrite(SCROLL_UP,LOW);
+        delay(50);
+        digitalWrite(SCROLL_UP,HIGH);
+        prevWheelPosition = wheelPosition;
+    } else if (wheelPosition==0&&prevWheelPosition==47)
+    {
+        digitalWrite(SCROLL_DN,LOW);
+        delay(50);
+        digitalWrite(SCROLL_DN,HIGH);
+        prevWheelPosition = wheelPosition;
+    }else if (wheelPosition > prevWheelPosition)
+    {
+        digitalWrite(SCROLL_DN,LOW);
+        delay(50);
+        digitalWrite(SCROLL_DN,HIGH);
+        prevWheelPosition = wheelPosition;
+    } else if (wheelPosition < prevWheelPosition)
+    {
+        digitalWrite(SCROLL_UP,LOW);
+        delay(50);
+        digitalWrite(SCROLL_UP,HIGH);
+        prevWheelPosition = wheelPosition;
+    }
+    
+   // printf("position %d\n", wheelPosition);
     lastBits = bits;
-    sendto(sockfd, (const char *)buffer, BUFFER_SIZE, 
-        MSG_CONFIRM, (const struct sockaddr *) &servaddr,  
-            sizeof(servaddr)); 
+    sendto(sockfd, (const char *)buffer, BUFFER_SIZE,
+           MSG_CONFIRM, (const struct sockaddr *) &servaddr,
+           sizeof(servaddr));
     memcpy(prev_buffer, buffer, BUFFER_SIZE);
 }
 
 // Function to set the kth bit of n 
 int setBit(int n, int k) { 
-    return (n | (1 << (k - 1))); 
+    return (n | (1 << (k - 1)));
 } 
-  
+
 // Function to clear the kth bit of n 
 int clearBit(int n, int k) { 
-    return (n & (~(1 << (k - 1)))); 
+    return (n & (~(1 << (k - 1))));
 } 
 
 void onClockEdge(int gpio, int level, uint32_t tick) {
@@ -193,49 +226,52 @@ void onDataEdge(int gpio, int level, uint32_t tick) {
 }
 
 int main(void *args){
-	wiringPiSetup () ;
-  	pinMode (KEY_LEFT, OUTPUT) ;  
-	pinMode(KEY_RIGHT,OUTPUT);
-	pinMode(KEY_UP ,OUTPUT);
-	pinMode(KEY_DOWN,OUTPUT);
-	pinMode(KEY_ENTER,OUTPUT);
-    // Creating socket file descriptor 
-    if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) { 
-        perror("socket creation failed"); 
-        exit(EXIT_FAILURE); 
+    wiringPiSetup () ;
+    pinMode (KEY_LEFT, OUTPUT) ;
+    pinMode(KEY_RIGHT,OUTPUT);
+    pinMode(KEY_UP ,OUTPUT);
+    pinMode(KEY_DOWN,OUTPUT);
+    pinMode(KEY_ENTER,OUTPUT);
+    pinMode(SCROLL_DN,OUTPUT);
+    pinMode(SCROLL_UP,OUTPUT);
+    // Creating socket file descriptor
+    if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+        perror("socket creation failed");
+        exit(EXIT_FAILURE);
     }
-    memset(&servaddr, 0, sizeof(servaddr)); 
-    servaddr.sin_family = AF_INET; 
-    servaddr.sin_port = htons(PORT); 
-    servaddr.sin_addr.s_addr = INADDR_ANY; 
-
+    memset(&servaddr, 0, sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_port = htons(PORT);
+    servaddr.sin_addr.s_addr = INADDR_ANY;
+    
     if (gpioInitialise() < 0) {
-       exit(1);
+        exit(1);
     }
-
+    
     // haptic waveform - just a simple on-off pulse
     gpioSetMode(HAPTIC_PIN, PI_OUTPUT);
     gpioPulse_t pulse[2];
     pulse[0].gpioOn = (1<<HAPTIC_PIN);
     pulse[0].gpioOff = 0;
     pulse[0].usDelay = 8000;
-
+    
     pulse[1].gpioOn = 0;
     pulse[1].gpioOff = (1<<HAPTIC_PIN);
     pulse[1].usDelay = 2000;
-
+    
     gpioWaveAddNew();
-
+    
     gpioWaveAddGeneric(2, pulse);
-
+    
     hapticWaveId = gpioWaveCreate();
     gpioSetPullUpDown(CLOCK_PIN, PI_PUD_UP);
     gpioSetPullUpDown(DATA_PIN, PI_PUD_UP);
     gpioSetAlertFunc(CLOCK_PIN, onClockEdge);
     gpioSetAlertFunc(DATA_PIN, onDataEdge);
-
+    
     while(1) {
-
+        
     };
     gpioTerminate();
 }
+
