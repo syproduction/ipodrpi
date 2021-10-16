@@ -103,8 +103,6 @@ then
         sudo /etc/init.d/console-setup.sh restart
 else
     echo Skipping..
-        
-
 
 read -r -p "CLEANUP ? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
@@ -114,8 +112,6 @@ then
 else
     echo Skipping..
         
-
-
 echo -e "\e[1;36m DONE. PLEASE REBOOT NOW \e[0m"
 
 
@@ -128,7 +124,6 @@ else
     echo Skipping..
         
 fi
-
 fi
 fi
 fi
