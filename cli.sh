@@ -13,7 +13,7 @@ then
 else
     echo -e "\e[1;36m SUPPOSING WE ARE ON RASPBIAN  \e[0m"
         
-fi
+
 
 
 read -r -p "Add Adding 2inch display parameters to /boot/config.txt ? [y/N] " response
@@ -30,7 +30,7 @@ then
 else
 	echo Skipping..
     	
-fi
+
 
 echo -e "\e[1;36m APT UPDATE & UPGRADE  \e[0m"
 sudo apt-get update
@@ -104,7 +104,7 @@ then
 else
     echo Skipping..
         
-fi
+
 
 read -r -p "CLEANUP ? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
@@ -114,7 +114,7 @@ then
 else
     echo Skipping..
         
-fi
+
 
 echo -e "\e[1;36m DONE. PLEASE REBOOT NOW \e[0m"
 
@@ -129,3 +129,7 @@ else
         
 fi
 
+fi
+fi
+fi
+fi
