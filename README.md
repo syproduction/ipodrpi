@@ -28,7 +28,7 @@ Ssh on computer (Mac) may refuse to connect if you were previously connecting to
 rm ~/.ssh/known_hosts
 ```
 # Caution
-Answer honestly on scrip question OSMC? Because on OSMC we need to disable OSMC repository to sucessfully APT-GET DIST-UPGRADE. When OSMC repository enabled, it fails with upgrading libc6.
+Answer honestly on script question OSMC? Because on OSMC we need to disable OSMC repository to sucessfully APT-GET DIST-UPGRADE. When OSMC repository enabled, it fails with upgrading libc6.
 
 # What gives
 
