@@ -77,12 +77,26 @@ cd ~/ipodrpi
 gcc -Wall -pthread -o click click.c -lpigpio -lrt -lwiringPi
 sudo chmod +x click
 sudo cp ~/ipodrpi/click /usr/local/bin/click
-sudo sed -i -e '$ i\click&' /etc/rc.local
+sudo cp ~/ipodrpi/system/click.sh /usr/local/bin/click.sh
+sudo chmod +x /usr/local/bin/click.sh
+sudo sed -i -e '$ i\/usr/local/bin/click.sh' /etc/rc.local
+
+
+read -r -p "CHANGE CONSOLE FONT TO BIGGER ? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+        sudo cp ~/ipodrpi/system/console-setup /etc/default/console-setup
+        sudo /etc/init.d/console-setup restart
+else
+    echo Skipping..
+        exit 0
+fi
 
 read -r -p "CLEANUP ? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
-        echo -e "\e[1;36m CLEANUP WILL BE IMPLEMENTED LATER  \e[0m"
+        echo -e "\e[1;36m OK, CLEANING ~ \e[0m"
+        sudo rm -r ~
 else
     echo Skipping..
         exit 0
