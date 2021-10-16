@@ -2,6 +2,20 @@
 
 #screen
 
+echo -e "\e[1;36m iPod Raspberry Pi with 2 inch LCD and CLICKWHEEL installer  \e[0m"
+echo -e "\e[1;36m by Niels Bor @ DARKMATTERWORKS  \e[0m"
+
+read -r -p "OSMC? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+        echo -e "\e[1;36m DISABLING OSMC REPOSITORY (BECAUSE OF LIBC6 ERROR)  \e[0m"
+        sudo bash -c 'echo "deb http://mirrordirector.raspbian.org/raspbian buster main contrib non-free rpi" > /etc/apt/sources.list'
+else
+    echo -e "\e[1;36m SUPPOSING WE ARE ON RASPBIAN  \e[0m"
+        exit 0
+fi
+
+
 read -r -p "Add Adding 2inch display parameters to /boot/config.txt ? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
