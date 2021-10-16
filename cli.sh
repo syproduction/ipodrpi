@@ -12,7 +12,7 @@ then
         sudo bash -c 'echo "deb http://mirrordirector.raspbian.org/raspbian buster main contrib non-free rpi" > /etc/apt/sources.list'
 else
     echo -e "\e[1;36m SUPPOSING WE ARE ON RASPBIAN  \e[0m"
-        exit 0
+        
 fi
 
 
@@ -29,7 +29,7 @@ then
 	sudo bash -c 'echo "display_rotate=0" >> /boot/config.txt'
 else
 	echo Skipping..
-    	exit 0
+    	
 fi
 
 echo -e "\e[1;36m APT UPDATE & UPGRADE  \e[0m"
@@ -103,7 +103,7 @@ then
         sudo /etc/init.d/console-setup.sh restart
 else
     echo Skipping..
-        exit 0
+        
 fi
 
 read -r -p "CLEANUP ? [y/N] " response
@@ -113,7 +113,7 @@ then
         sudo rm -r ~
 else
     echo Skipping..
-        exit 0
+        
 fi
 
 echo -e "\e[1;36m DONE. PLEASE REBOOT NOW \e[0m"
@@ -126,6 +126,6 @@ then
         sudo reboot now
 else
     echo Skipping..
-        exit 0
+        
 fi
 
