@@ -32,14 +32,14 @@ Answer honestly on script question OSMC? Because on OSMC we need to disable OSMC
 
 Script will install everything you need to get Raspberry Pi Zero W working with 2 inch Waveshare 320x240 display and iPod's clickwheel.
 
-Clickwheel    Keyboard
-Scroll CCW  = KEY_UP
-Scroll CW   = KEY_DOWN
-LEFT        = KEY_PREVIOUSSONG
-RIGHT       = KEY_NEXTSONG
-UP          = KEY_ESC
-DOWN        = KEY_PLAYPAUSE
-CENTER      = KEY_ENTER
+- Clickwheel    Keyboard
+- Scroll CCW  = KEY_UP
+- Scroll CW   = KEY_DOWN
+- LEFT        = KEY_PREVIOUSSONG
+- RIGHT       = KEY_NEXTSONG
+- UP          = KEY_ESC
+- DOWN        = KEY_PLAYPAUSE
+- CENTER      = KEY_ENTER
 
 # Whats inside
 1. Disables OSMC repository of APT because it gives errors with libc6. You can add it later to /etc/apt/sources.list (deb http://apt.osmc.tv buster main)
@@ -53,6 +53,6 @@ CENTER      = KEY_ENTER
 Perfectly described here: http://rsflightronics.com/spotifypod
 
 # Mentions
-- Guy Dupont (https://github.com/dupontgu/retro-ipod-spotify-client)for inspiration and click.c rework of:
+- Guy Dupont (https://github.com/dupontgu/retro-ipod-spotify-client) for inspiration and click.c rework of:
 - Jason Garr (https://jasongarr.wordpress.com/project-pages/ipod-clickwheel-hack/) for clickwheel hacking
 
