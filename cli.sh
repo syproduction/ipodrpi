@@ -86,7 +86,7 @@ read -r -p "CHANGE CONSOLE FONT TO BIGGER ? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
         sudo cp ~/ipodrpi/system/console-setup /etc/default/console-setup
-        sudo /etc/init.d/console-setup restart
+        sudo /etc/init.d/console-setup.sh restart
 else
     echo Skipping..
         exit 0
@@ -103,6 +103,7 @@ else
 fi
 
 echo -e "\e[1;36m DONE. PLEASE REBOOT NOW \e[0m"
+
 
 read -r -p "REBOOT ? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
