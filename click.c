@@ -146,34 +146,35 @@ void sendPacket() {
     if (memcmp(prev_buffer, buffer, BUFFER_SIZE) == 0) {
         return;
     }
-    
-    if (wheelPosition==47&&prevWheelPosition==0)
+    if (buffer[BUTTON_INDEX]!=7)
     {
-        digitalWrite(SCROLL_UP,LOW);
-        delay(50);
-        digitalWrite(SCROLL_UP,HIGH);
-        prevWheelPosition = wheelPosition;
-    } else if (wheelPosition==0&&prevWheelPosition==47)
-    {
-        digitalWrite(SCROLL_DN,LOW);
-        delay(50);
-        digitalWrite(SCROLL_DN,HIGH);
-        prevWheelPosition = wheelPosition;
-    }else if (wheelPosition > prevWheelPosition)
-    {
-        digitalWrite(SCROLL_DN,LOW);
-        delay(50);
-        digitalWrite(SCROLL_DN,HIGH);
-        prevWheelPosition = wheelPosition;
-    } else if (wheelPosition < prevWheelPosition)
-    {
-        digitalWrite(SCROLL_UP,LOW);
-        delay(50);
-        digitalWrite(SCROLL_UP,HIGH);
-        prevWheelPosition = wheelPosition;
+        if (wheelPosition==47&&prevWheelPosition==0)
+        {
+            digitalWrite(SCROLL_UP,LOW);
+            delay(50);
+            digitalWrite(SCROLL_UP,HIGH);
+            prevWheelPosition = wheelPosition;
+        } else if (wheelPosition==0&&prevWheelPosition==47)
+        {
+            digitalWrite(SCROLL_DN,LOW);
+            delay(50);
+            digitalWrite(SCROLL_DN,HIGH);
+            prevWheelPosition = wheelPosition;
+        }else if (wheelPosition > prevWheelPosition)
+        {
+            digitalWrite(SCROLL_DN,LOW);
+            delay(50);
+            digitalWrite(SCROLL_DN,HIGH);
+            prevWheelPosition = wheelPosition;
+        } else if (wheelPosition < prevWheelPosition)
+        {
+            digitalWrite(SCROLL_UP,LOW);
+            delay(50);
+            digitalWrite(SCROLL_UP,HIGH);
+            prevWheelPosition = wheelPosition;
+        }
     }
-    
-   // printf("position %d\n", wheelPosition);
+    // printf("position %d\n", wheelPosition);
     lastBits = bits;
     sendto(sockfd, (const char *)buffer, BUFFER_SIZE,
            MSG_CONFIRM, (const struct sockaddr *) &servaddr,
@@ -227,13 +228,21 @@ void onDataEdge(int gpio, int level, uint32_t tick) {
 
 int main(void *args){
     wiringPiSetup () ;
-    pinMode (KEY_LEFT, OUTPUT) ;
+    pinMode(KEY_LEFT, OUTPUT) ;
     pinMode(KEY_RIGHT,OUTPUT);
     pinMode(KEY_UP ,OUTPUT);
     pinMode(KEY_DOWN,OUTPUT);
     pinMode(KEY_ENTER,OUTPUT);
     pinMode(SCROLL_DN,OUTPUT);
     pinMode(SCROLL_UP,OUTPUT);
+    digitalWrite(KEY_LEFT,HIGH);
+    digitalWrite(KEY_RIGHT,HIGH);
+    digitalWrite(KEY_UP,HIGH);
+    digitalWrite(KEY_DOWN,HIGH);
+    digitalWrite(KEY_ENTER,HIGH);
+    digitalWrite(SCROLL_DN,HIGH);
+    digitalWrite(SCROLL_UP,HIGH);
+    
     // Creating socket file descriptor
     if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
         perror("socket creation failed");
