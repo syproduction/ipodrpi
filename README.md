@@ -9,7 +9,6 @@ OSMC:
 - SSH to RPi from computer or on RPi go to Power > Exit and smash ESC key on keyboard until you get into shell. Default credentials: osmc : osmc
 
 RASPBIAN: 
-On your computer:
 - Burn SD card with Raspberry Pi Imager > Raspberry Pi OS (32-bit)
 - Put empty file named "ssh" on SD 
 - Fill your WIFI name and password in wpa_supplicant.conf and put it on SD
