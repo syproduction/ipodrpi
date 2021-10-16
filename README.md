@@ -19,8 +19,7 @@ On your computer:
 Type 3 commands:
 ```
 wget https://raw.githubusercontent.com/syproduction/ipodrpi/main/cli.sh
-./osmc.sh
-sudo chmod +x ./osmc.sh
+sudo chmod +x ./cli.sh
 ./cli.sh
 ```
 Ssh on computer (Mac) may refuse to connect if you were previously connecting to this RPi, then:
