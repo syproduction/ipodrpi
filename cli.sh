@@ -111,6 +111,7 @@ echo -e "\e[1;36m OK \e[0m"
 sudo apt-get install cmus
 sudo cp ~/ipodrpi/system/alsa-base.conf /etc/modprobe.d/alsa-base.conf
 sudo cp ~/iopdrpi/system/rc ~/.config/cmus/rc
+echo -e "\e[1;36m IF NO SOUND IN CMUS, SET IT UP IN RASPI-CONFIG \e[0m"
 else
 echo Skipping..
 fi
