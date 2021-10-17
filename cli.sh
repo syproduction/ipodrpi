@@ -104,6 +104,17 @@ else
 echo Skipping..
 fi
 
+read -r -p " CMUS with CREATIVE PLAY! ? " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+echo -e "\e[1;36m OK \e[0m"
+sudo apt-get install cmus
+sudo cp ~/ipodrpi/system/alsa-base.conf /etc/modprobe.d/alsa-base.conf
+sudo cp ~/iopdrpi/system/rc ~/.config/cmus/rc
+else
+echo Skipping..
+fi
+
 echo -e "\e[1;36m DONE. PLEASE REBOOT NOW \e[0m"
 
 read -r -p "REBOOT ? [y/N] " response
