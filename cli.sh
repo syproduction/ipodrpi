@@ -115,6 +115,7 @@ echo "cmus" >> ~/.bashrc
 #echo "~/.config/cmus/cmus-update.sh" >> ~/.bashrc
 echo -e "\e[1;36m IF NO SOUND IN CMUS, SET IT UP IN RASPI-CONFIG \e[0m"
 echo -e "\e[1;36m AND SET UP AUTOLOGIN IN RASPI-CONFIG \e[0m"
+sudo raspi-config
 else
 echo Skipping..
 fi
