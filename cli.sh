@@ -95,15 +95,6 @@ else
 echo Skipping..
 fi
 
-read -r -p "CLEANUP ? [y/N] " response
-if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
-then
-echo -e "\e[1;36m OK, CLEANING ~ \e[0m"
-sudo rm -r ~
-else
-echo Skipping..
-fi
-
 read -r -p " CMUS with CREATIVE PLAY! ? " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
@@ -111,14 +102,34 @@ echo -e "\e[1;36m OK \e[0m"
 sudo apt-get install cmus -y
 sudo cp ~/ipodrpi/system/alsa-base.conf /etc/modprobe.d/alsa-base.conf
 sudo cp ~/iopdrpi/system/rc ~/.config/cmus/rc
+sudo cp ~/ipodrpi/system/cmus-update.sh ~/.config/cmus/cmus-update.sh
+sudo rm /etc/pikeyd.conf
+sudo cp ~/ipodrpi/etc/pikeyd.conf.cmus /etc/pikeyd.conf
+cmus :bind -f common u shell ~/.config/cmus/cmus-update.sh
+sudo bash -c 'echo "cmus" >> ~/.bashrc'
 echo -e "\e[1;36m IF NO SOUND IN CMUS, SET IT UP IN RASPI-CONFIG \e[0m"
 echo -e "\e[1;36m AND SET UP AUTOLOGIN IN RASPI-CONFIG \e[0m"
 else
 echo Skipping..
 fi
 
-echo -e "\e[1;36m DONE. PLEASE REBOOT NOW \e[0m"
 
+read -r -p "CLEANUP ? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+echo -e "\e[1;36m OK, CLEANING ~ \e[0m"
+sudo rm -r ~/ipodrpi
+sudo rm -r ~/pigpio-master
+sudo rm -r waveshare_fbcp-main
+sudo rm -r WiringPi
+sudo rm pikeyd
+sudo rm Waveshare_fbcp-main.7z
+else
+echo Skipping..
+fi
+
+
+echo -e "\e[1;36m DONE. PLEASE REBOOT NOW \e[0m"
 read -r -p "REBOOT ? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
