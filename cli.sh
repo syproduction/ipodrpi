@@ -105,8 +105,9 @@ sudo cp ~/ipodrpi/system/rc ~/.config/cmus/rc
 sudo cp ~/ipodrpi/system/cmus-update.sh ~/.config/cmus/cmus-update.sh
 sudo rm /etc/pikeyd.conf
 sudo cp ~/ipodrpi/etc/pikeyd.conf.cmus /etc/pikeyd.conf
-cmus :bind -f common u shell ~/.config/cmus/cmus-update.sh &
+#cmus :bind -f common u shell ~/.config/cmus/cmus-update.sh &
 echo "cmus" >> ~/.bashrc
+echo "~/.config/cmus/cmus-update.sh" >> ~/.bashrc
 echo -e "\e[1;36m IF NO SOUND IN CMUS, SET IT UP IN RASPI-CONFIG \e[0m"
 echo -e "\e[1;36m AND SET UP AUTOLOGIN IN RASPI-CONFIG \e[0m"
 else
