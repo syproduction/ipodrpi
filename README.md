@@ -48,9 +48,17 @@ Script will install everything you need to get Raspberry Pi Zero W working with 
 4. PiGPIO
 5. wiringPi
 6. click.c + pigpio abomination
+7. CMUS
 
 # Wiring
-Perfectly described here: http://rsflightronics.com/spotifypod
+
+<img width="300" alt="Screen Shot 2021-10-19 at 12 40 11 PM" src="https://user-images.githubusercontent.com/26803370/137865049-eb68ea79-724c-4ad0-b095-4171e9a41267.png">
+
+![SpotifyPod_schematicsclickwheel-1536x1242](https://user-images.githubusercontent.com/26803370/137865290-7cd4b812-71f0-4c6b-b2e4-2a74a8433b52.png)
+
+# Preview
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/mpBJcG3rq2I/0.jpg)](https://www.youtube.com/watch?v=mpBJcG3rq2I)
 
 # Mentions
 - Guy Dupont (https://github.com/dupontgu/retro-ipod-spotify-client) for inspiration and click.c rework of:
