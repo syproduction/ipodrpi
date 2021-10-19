@@ -106,6 +106,7 @@ sudo cp ~/ipodrpi/etc/pikeyd.conf.cmus /etc/pikeyd.conf
 cmus &
 cmus-remote -C "bind -f common u shell ~/.config/cmus/cmus-update.sh" &
 cmus-remote -C "set softvol=true" &
+sudo killall cmus
 sudo mkdir ~/Music
 sudo cp ~/ipodrpi/system/rc ~/.config/cmus/rc
 sudo cp ~/ipodrpi/system/cmus-update.sh ~/.config/cmus/cmus-update.sh
