@@ -25,6 +25,11 @@ Ssh on computer (Mac) may refuse to connect if you were previously connecting to
 ```
 rm ~/.ssh/known_hosts
 ```
+After all install please do 
+```
+sudo raspi-config
+```
+And select Auto Login to Command Line, expand filesystem
 # Caution
 Answer honestly on script question OSMC? Because on OSMC we need to disable OSMC repository to sucessfully APT-GET DIST-UPGRADE. When OSMC repository enabled, it fails with upgrading libc6.
 
