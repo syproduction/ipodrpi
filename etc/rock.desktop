@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Rockbox
+Comment=Rockboxui
+Exec=/usr/local/bin/rock.sh
+Terminal=false
+Type=Application
+Actions=NewWindow;Incognito;TempProfile;
+Categories=Programming;
+

@@ -3,16 +3,23 @@
 #format:
 # [keycode from /usr/include/linux/input.h] [whitespace] [GPIO pin no]
 # Not limited to a single key. A GPIO press will emit all defined keys in order.
+#Rockbox
+KEY_KP4       0
+KEY_KP6   1
+KEY_KPDOT                16
+KEY_KPPLUS  6
+KEY_ENTER      13
+KEY_KP2       12
+KEY_KP8         20
 
-
-
-KEY_PREVIOUSSONG	0
-KEY_NEXTSONG	1
-KEY_ESC		16
-KEY_PLAYPAUSE	6
-KEY_ENTER	13
-KEY_DOWN   	12
-KEY_UP		20
+#CMUS
+#KEY_PREVIOUSSONG	0
+#KEY_NEXTSONG	1
+#KEY_ESC		16
+#KEY_PLAYPAUSE	6
+#KEY_ENTER	13
+#KEY_DOWN   	12
+#KEY_UP		20
 
 
 #KEY_LEFT	0

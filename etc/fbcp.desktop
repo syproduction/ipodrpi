@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=FBCP
+Comment=FBCP
+Exec=fbcp
+Terminal=false
+Type=Daemon
+Actions=NewWindow;Incognito;TempProfile;
+Categories=Programming;
+
