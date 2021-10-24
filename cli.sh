@@ -168,7 +168,6 @@ else
 echo Skipping..
 fi
 
-
 echo -e "\e[1;36m DONE. PLEASE REBOOT NOW \e[0m"
 read -r -p "REBOOT ? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
