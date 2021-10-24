@@ -54,6 +54,7 @@ Script will install everything you need to get Raspberry Pi Zero W working with 
 5. wiringPi
 6. click.c + pigpio abomination
 7. CMUS
+8. ncmpcpp
 
 # Wiring
 
