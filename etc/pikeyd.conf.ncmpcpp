@@ -5,9 +5,9 @@
 # Not limited to a single key. A GPIO press will emit all defined keys in order.
 
 #ncmpcpp
-KEY_KPMINUS     0 	//left
+KEY_KPMINUS     0       //left
 KEY_KPPLUS      1       //right
-KEY_I           16      //up
+KEY_TAB           16      //up
 KEY_P           6       //down
 KEY_ENTER       13      //center
 KEY_DOWN        12      //ccw
