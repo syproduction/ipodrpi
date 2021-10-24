@@ -126,6 +126,31 @@ else
 echo Skipping..
 fi
 
+read -r -p "ncmpcpp ? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+echo -e "\e[1;36m OK, ncmpcpp WILL START AT BOOT \e[0m"
+sudo apt-get install -y mpd mpc ncmpcpp
+sudo rm /etc/mpd.conf
+sudo cp ~/ipodrpi/etc/mpd.conf /etc/mpd.conf
+mpc update
+sudo rm /etc/pikeyd.conf
+sudo cp ~/ipodrpi/etc/pikeyd.conf.ncmpcpp /etc/pikeyd.conf
+echo "mpc update" >> ~/.bashrc
+echo "ncmpcpp" >> ~/.bashrc
+else
+echo Skipping..
+fi
+
+read -r -p "TUNE VOLUME IN ALSAMIXER ? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+echo -e "\e[1;36m UP/DOWN arrow keys to tune volume, ESC to exit \e[0m"
+alsamixer
+else
+echo Skipping..
+fi
+
 read -r -p "CLEANUP ? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
