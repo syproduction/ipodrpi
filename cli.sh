@@ -133,9 +133,10 @@ echo -e "\e[1;36m OK, ncmpcpp WILL START AT BOOT \e[0m"
 sudo apt-get install -y mpd mpc ncmpcpp
 sudo rm /etc/mpd.conf
 sudo cp ~/ipodrpi/etc/mpd.conf /etc/mpd.conf
-mkdir ~/Music/playlists
+sudo mkdir ~/Music
+sudo mkdir ~/Music/playlists
 sudo ln -s ~/Music /var/lib/mpd/Music
-sudo ln -s ~/Music/playlists /var/lib/mpd/Music/playlists
+#sudo ln -s ~/Music/playlists /var/lib/mpd/Music/playlists
 mpc update
 sudo rm /etc/pikeyd.conf
 sudo cp ~/ipodrpi/etc/pikeyd.conf.ncmpcpp /etc/pikeyd.conf

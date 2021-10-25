@@ -44,3 +44,11 @@ KEY_PLAYPAUSE   6       //down
 KEY_ENTER       13      //center
 KEY_DOWN        12      //ccw
 KEY_UP          20      //cw
+
+
+bluetoothctl connect A8:4D:4A:3E:50:3C
+aplay -D bluealsa:DEV=A8:4D:4A:3E:50:3C,PROFILE=sco /usr/share/sounds/alsa/Front_Center.wav
+
+git clone https://github.com/Arkq/bluez-alsa
+cd bluez-alsa/
+sudo apt-get install dh-autoreconf
