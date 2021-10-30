@@ -71,4 +71,5 @@ Script will install everything you need to get Raspberry Pi Zero W working with 
 # Mentions
 - Guy Dupont (https://github.com/dupontgu/retro-ipod-spotify-client) for inspiration and click.c rework of:
 - Jason Garr (https://jasongarr.wordpress.com/project-pages/ipod-clickwheel-hack/) for clickwheel hacking
+- Ricardo Sappia (http://rsflightronics.com/spotifypod) for smart and beautiful wiring
 
