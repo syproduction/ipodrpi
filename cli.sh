@@ -155,6 +155,22 @@ else
 echo Skipping..
 fi
 
+
+read -r -p " VNC (DISPMANX) ?[y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+echo -e "\e[1;36m OK \e[0m"
+sudo apt-get install libvncserver-dev
+cd
+git clone https://github.com/hanzelpeter/dispmanx_vnc
+cd dispmanx_vnc
+make
+sudo ./dispmanx_vncserver
+else
+echo Skipping..
+fi
+
+
 read -r -p "CLEANUP ? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
